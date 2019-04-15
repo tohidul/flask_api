@@ -1,0 +1,7 @@
+{
+    "terminal.integrated.shell.windows": "C:\\Windows\\system32\\cmd.exe",
+    "python.pythonPath": "E:\\Environments\\flask_env\\Scripts\\python.exe",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.linting.pylintArgs": ["--load-plugins", "pylint_flask"]
+}
