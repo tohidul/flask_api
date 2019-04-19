@@ -5,18 +5,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Flask",
+            "name": "Python: Terminal (integrated)",
             "type": "python",
             "request": "launch",
-            "module": "flask",
-            "env": {
-                "FLASK_APP": "main.py",
-                // "PYTHONPATH": "E:\\projects\\flask_test"
-            },
-            "args": [
-                "run",
-            ],
-            "jinja": true
+            "program": "${file}",
+            "console": "integratedTerminal"
         }
     ]
 }

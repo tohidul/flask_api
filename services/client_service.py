@@ -4,8 +4,13 @@ from flask import jsonify
 client_schema = ClientSchema(strict=True)
 clients_schema = ClientSchema(many=True, strict=True)
 
-def add_client(cid,client_name,client_description):
+def construct_new_client(cid,client_name,client_description):
     new_client = Client(cid, client_name, client_description)
+    return new_client
+
+
+def add_client(cid,client_name,client_description):
+    new_client = construct_new_client(cid, client_name, client_description)
     
     check_client = Client.query.filter_by(cid=cid).first()
 
