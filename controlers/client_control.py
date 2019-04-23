@@ -47,14 +47,14 @@ def get_client_by_cid(cid):
 
     return response
 
-@client_api.route('/api/clients/<cid>', methods=['PUT'])
-def update_client_by_cid(cid):
+@client_api.route('/api/clients/<id>', methods=['PUT'])
+def update_client_by_id(id):
 
     new_cid = request.json['cid']
     new_client_name = request.json['client_name']
     new_client_description = request.json['client_description']
     #print(cid+'222222222')
-    response = client_service.update_client_by_cid(cid, new_cid, new_client_name, new_client_description)
+    response = client_service.update_client_by_id(id, new_cid, new_client_name, new_client_description)
 
     # new_user = User(user_name,user_email,user_passwordole_id)
     # db.session.add(new_user)
@@ -62,11 +62,11 @@ def update_client_by_cid(cid):
 
     return jsonify(response)
 
-@client_api.route('/api/clients/<cid>', methods=['DELETE'])
-def delete_client_by_cid(cid):
+@client_api.route('/api/clients/<id>', methods=['DELETE'])
+def delete_client_by_cid(id):
 
     #print(cid+'222222222')
-    response = client_service.delete_client_by_cid(cid)
+    response = client_service.delete_client_by_id(id)
 
     # new_user = User(user_name,user_email,user_passwordole_id)
     # db.session.add(new_user)

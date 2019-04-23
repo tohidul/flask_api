@@ -47,9 +47,9 @@ def get_client_by_cid(cid):
     else:
         return client_schema.jsonify(client)
         
-def update_client_by_cid(old_cid, new_cid, new_client_name, new_client_description):
+def update_client_by_id(id, new_cid, new_client_name, new_client_description):
 
-    client_to_update = Client.query.filter_by(cid=old_cid).first()
+    client_to_update = Client.query.filter_by(id=id).first()
     if client_to_update:
         client_to_update.cid=new_cid
         client_to_update.client_description = new_client_description
@@ -61,9 +61,9 @@ def update_client_by_cid(old_cid, new_cid, new_client_name, new_client_descripti
     else:
         return {'success':False}
 
-def delete_client_by_cid(cid):
+def delete_client_by_id(id):
 
-    if(Client.query.filter_by(cid=cid).delete()):
+    if(Client.query.filter_by(id=id).delete()):
         db.session.commit()
         return {'success':True}
     else:

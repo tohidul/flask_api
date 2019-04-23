@@ -1,32 +1,59 @@
-import os
-import tempfile
-
+from shared.models import db,ma
+from models.client_model import Client
+from services import client_service
+from sqlalchemy import create_engine
 import pytest
-import mock
-import main
-from shared.models import db
+from unittest import mock
+from mock import patch
 
-@pytest.fixture
-def client():
-    db_fd, main.app.config['DATABASE'] = tempfile.mkstemp()
-    main.app.config['TESTING'] = True
-    client = main.app.test_client()
+def test_construct_new_client():
+    new_client = client_service.construct_new_client('comm', 'community', 'credit union')
 
-
-    db.app=main.app
-    db.init_app(main.app)
-
-    with main.app.app_context():
-        db.create_all()
-    yield client
-
-    os.close(db_fd)
-    os.unlink(main.app.config['DATABASE'])
+    assert new_client.cid == 'comm'
+    assert new_client.client_name == 'community'
+    assert new_client.client_description == 'credit union'
 
 
-def test_client_service(client):
-    import services
-    from services.client_service import get_all_clients
-    services.client_service.Client.query.all = mock.Mock(return_value={})
 
-    print(get_all_clients())
+# def test_func1():
+#     ret = func1()
+#     assert ret == 3
+
+mocked_data_all_clients = [
+    {
+        "cid": "test use1r",
+        "client_description": "123",
+        "client_name": "rre@s1d.com",
+        "id": 1
+    },
+    {
+        "cid": "e1r",
+        "client_description": "123",
+        "client_name": "rre@s1d.com",
+        "id": 2
+    },
+    {
+        "cid": "e11212r",
+        "client_description": "123",
+        "client_name": "rre@s1d.com",
+        "id": 3
+    },
+    {
+        "cid": "amac",
+        "client_description": "a credit union",
+        "client_name": "asdfqwer",
+        "id": 4
+    }
+]
+
+#@pytest.mark.parametrize('data', [mocked_data_all_clients, {}])
+@patch('Client.query.all')
+def test_get_all_clients(mock_all):
+    mock_Client.query.all.return_value = mocked_data_all_clients
+    a = client_service.get_all_clients()
+    if a:
+        assert a == mocked_data_all_clients
+    else:
+        assert a == {
+            "message": "no data fetched"
+        }

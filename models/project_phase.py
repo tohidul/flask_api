@@ -1,4 +1,4 @@
-from main import db
+from shared.models import db, ma
 
 class ProjectPhase(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -9,3 +9,10 @@ class ProjectPhase(db.Model):
 
     def __init__(self, phase_details, phase_weight, phase_status):
         self.phase_details = phase_details
+    def __repr__(self):
+        return '<Client %r>' %self.client_name
+
+
+class ClientSchema(ma.Schema):
+	class Meta:
+		fields = ('id', 'cid', 'client_name', 'client_description')
