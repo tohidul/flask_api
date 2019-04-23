@@ -1,0 +1,19 @@
+variables:
+  IMAGE_NAME: pptm-api
+  CONTIANER_NAME: pptm-api-container
+
+stages: 
+  - build
+  - deploy
+
+docker build:
+  stage: build
+  script:
+    - docker build ./ -t $IMAGE_NAME
+
+
+container deploy:
+  stage: deploy
+  script:
+    - docker rm $pptm-api-container
+    - docker run -d -p 5000:5000 pptm-api-container
