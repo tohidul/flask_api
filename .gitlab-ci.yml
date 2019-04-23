@@ -6,6 +6,12 @@ stages:
   - build
   - deploy
 
+cleanup previous container:
+  stage: build
+  allow_failure: true
+  script:
+    - docker rm $pptm-api-container
+
 docker build:
   stage: build
   script:
@@ -15,5 +21,4 @@ docker build:
 container deploy:
   stage: deploy
   script:
-    - docker rm $pptm-api-container
     - docker run -d -p 5000:5000 pptm-api-container
