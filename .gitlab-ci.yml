@@ -1,0 +1,24 @@
+variables:
+  IMAGE_NAME: pptm-api
+  CONTIANER_NAME: pptm-api-container
+
+stages: 
+  - build
+  - deploy
+
+cleanup previous container:
+  stage: build
+  allow_failure: true
+  script:
+    - docker rm -f $CONTIANER_NAME
+
+docker build:
+  stage: build
+  script:
+    - docker build ./ -t $IMAGE_NAME
+
+
+container deploy:
+  stage: deploy
+  script:
+    - docker run --name=$CONTIANER_NAME -d -p 5000:5000 $IMAGE_NAME
