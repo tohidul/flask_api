@@ -49,7 +49,7 @@ mocked_data_all_clients = [
 #@pytest.mark.parametrize('data', [mocked_data_all_clients, {}])
 @patch('Client.query.all')
 def test_get_all_clients(mock_all):
-    mock_Client.query.all.return_value = mocked_data_all_clients
+    mock_all.return_value = mocked_data_all_clients
     a = client_service.get_all_clients()
     if a:
         assert a == mocked_data_all_clients

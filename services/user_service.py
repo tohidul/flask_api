@@ -1,12 +1,13 @@
 from shared.models import db,ma
 from models.user_model import User, UserSchema
+from models.role_model import Role, RoleSchema
 from flask import jsonify
 user_schema = UserSchema(strict=True)
 users_schema = UserSchema(many=True, strict=True)
 
 def construct_new_client(user_name,user_email,user_password,user_role):
-
-    new_client = Client(cid, client_name, client_description)
+    user_role_id = 
+    new_user = Client(cid, client_name, client_description)
     return new_client
 
 def add_user(cid,client_name,client_description):
