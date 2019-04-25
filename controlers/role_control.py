@@ -10,7 +10,7 @@ role_api = Blueprint('role_api',__name__)
 role_schema = RoleSchema(strict = True)
 roles_schema = RoleSchema(many = True, strict = True)
 
-@role_api.route('/api/role', methods=['POST'])
+@role_api.route('/api/user_roles', methods=['POST'])
 def add_role():
     role_name = request.json['role_name']
     
@@ -19,21 +19,21 @@ def add_role():
     return jsonify(response)
 
 
-@role_api.route('/api/role', methods=['GET'])
+@role_api.route('/api/user_roles', methods=['GET'])
 def get_all_roles():
 
     response = role_service.get_all_roles()
 
     return jsonify(response)
 
-@role_api.route('/api/role/<role_name>', methods=['GET'])
+@role_api.route('/api/user_roles/<role_name>', methods=['GET'])
 def get_role_by_role_name(role_name):
 
     response = role_service.get_role_by_role_name(role_name)
 
     return response
 
-@role_api.route('/api/role/<role_name>', methods=['PUT'])
+@role_api.route('/api/user_roles/<role_name>', methods=['PUT'])
 def update_role_by_name(role_name):
 
     new_role_name = request.json['role_name']
@@ -41,7 +41,7 @@ def update_role_by_name(role_name):
 
     return jsonify(response)
 
-@role_api.route('/api/role/<role_name>', methods=['DELETE'])
+@role_api.route('/api/user_roles/<role_name>', methods=['DELETE'])
 def delete_role_by_name(role_name):
 
     response = role_service.delete_role_by_name(role_name)
