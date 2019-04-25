@@ -5,6 +5,7 @@ role_schema = RoleSchema(strict=True)
 roles_schema = RoleSchema(many=True, strict=True)
 
 def add_role(role_name):
+    role_name = role_name.upper()
     new_role = Role(role_name)
     
     check_role = Role.query.filter_by(role_name=role_name).first()
