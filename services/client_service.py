@@ -5,6 +5,7 @@ client_schema = ClientSchema(strict=True)
 clients_schema = ClientSchema(many=True, strict=True)
 
 def construct_new_client(cid,client_name,client_description):
+    client_name = client_name.upper()
     new_client = Client(cid, client_name, client_description)
     return new_client
 
