@@ -26,24 +26,24 @@ def get_all_roles():
 
     return jsonify(response)
 
-@role_api.route('/api/user_roles/<role_name>', methods=['GET'])
-def get_role_by_role_name(role_name):
+@role_api.route('/api/user_roles/<role_id>', methods=['GET'])
+def get_role_by_role_id(role_id):
 
-    response = role_service.get_role_by_role_name(role_name)
+    response = role_service.get_role_by_role_id(role_id)
 
     return response
 
-@role_api.route('/api/user_roles/<role_name>', methods=['PUT'])
-def update_role_by_name(role_name):
+@role_api.route('/api/user_roles/<role_id>', methods=['PUT'])
+def update_role_by_id(role_id):
 
     new_role_name = request.json['role_name']
-    response = role_service.update_role_by_name(role_name, new_role_name)
+    response = role_service.update_role_by_id(role_id, new_role_name)
 
     return jsonify(response)
 
-@role_api.route('/api/user_roles/<role_name>', methods=['DELETE'])
-def delete_role_by_name(role_name):
+@role_api.route('/api/user_roles/<role_id>', methods=['DELETE'])
+def delete_role_by_id(role_id):
 
-    response = role_service.delete_role_by_name(role_name)
+    response = role_service.delete_role_by_id(role_id)
 
     return jsonify(response)
